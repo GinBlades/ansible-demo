@@ -18,3 +18,48 @@
       become: true
       apt:
         upgrade: dist
+    - name: Install Standard Utilities
+      become: true
+      apt:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - git
+        - vim-nox
+        - ack-grep
+        - curl
+        - sqlite3
+        - build-essential
+        - python-software-properties
+        - libyaml-dev
+        - libsqlite3-dev
+        - tmux
+        - samba
+    - name: Add PHP 7 PPA Repository
+      become: true
+      apt_repository:
+        repo: "ppa:ondrej/php"
+    - name: Install MySQL
+      become: true
+      apt:
+        name: mysql-server
+        state: latest
+    - name: Install PHP Packages
+      become: true
+      apt:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - php7.1-cli
+        - php7.1-curl
+        - php7.1-fpm
+        - php7.1-intl
+        - php7.1-mysql
+        - php7.1-cli
+        - php7.1-gd
+        - php7.1-mbstring
+        - php7.1-mcrypt
+        - php7.1-xml
+        - php7.1-xmlrpc
+        - php7.1-sqlite3
+
